@@ -7,6 +7,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 load_dotenv()
+print(f"OpenAI API Key: {os.getenv('OPEN_API_KEY')}")
 
 
 client = OpenAI(
@@ -16,6 +17,7 @@ client = OpenAI(
 @app.route('/api/suggest', methods=['POST'])
 def suggest():
   data = request.json
+  print(f"Incoming request data: {data}")
   prompt = data.get('prompt', '')
   try:
     response = client.chat.completions.create(
@@ -26,9 +28,11 @@ def suggest():
       ],
       max_tokens=100
     )
+    print(response)
     suggestion = response.choices[0].message.content.strip()
     return jsonify({"suggestion": suggestion})
   except Exception as e:
+    print(f"Error: {e}")
     return jsonify({"error": str(e)}), 500
 
 @app.route('/')
