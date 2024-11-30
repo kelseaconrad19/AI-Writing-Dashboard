@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
+import InputField from "./components/InputField";
 
 function App() {
 	const [editorState, setEditorState] = useState(() =>
@@ -38,6 +39,11 @@ function App() {
 		}
 	};
 
+	const handleUserInput = (input) => {
+		console.log("User input:", input);
+		// TODO: Send the input to the backend
+	};
+
 	useEffect(() => {
 		fetch("/")
 			.then((response) => response.text())
@@ -47,7 +53,8 @@ function App() {
 
 	return (
 		<div className="App" style={{ padding: "20px" }}>
-			<h1>AI Writing Dashboard</h1>
+			<h1>Pseudo-Right Dashboard</h1>
+			<InputField onSubmit={handleUserInput} />
 			<form onSubmit={handleSubmit}>
 				<div
 					style={{
