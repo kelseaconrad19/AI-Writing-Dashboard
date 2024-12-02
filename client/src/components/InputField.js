@@ -8,7 +8,7 @@ const InputField = ({ onSubmit }) => {
 	};
 
 	const handleSubmit = (e) => {
-		e.preventDefaut();
+		e.preventDefault();
 		if (inputValue.trim() === "") {
 			alert("Please enter a topic or keyword.");
 			return;
@@ -18,7 +18,11 @@ const InputField = ({ onSubmit }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} style={{ display: "flex", gap: "10px" }}>
+		<form
+			id="input-field"
+			onSubmit={handleSubmit}
+			style={{ display: "flex", gap: "10px" }}
+		>
 			<input
 				type="text"
 				value={inputValue}
